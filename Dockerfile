@@ -3,10 +3,10 @@ FROM python:3.9
 
 ENV PYTHONUNBUFFERED=1
 
+RUN pip install poetry
+
 WORKDIR /usr/src/app
 
-COPY poetry.lock pyproject.toml /OnlineCompilerPython/ /templates/
-
-RUN pip install poetry
+COPY poetry.lock pyproject.toml ./
 
 RUN poetry install
