@@ -1,8 +1,10 @@
+import sys
+
 from multiprocessing import Process
 
 from django.shortcuts import render
 from OnlineCompilerPython.pycompiler.python_compile import make_safe_builtins,\
-    check_code, execute_code
+    check_code
 
 from io import StringIO
 from contextlib import redirect_stdout
@@ -31,11 +33,11 @@ def runcode(request):
             s_output = StringIO()
 
             # execution input code with safe_builtins limited by runtime
-
             with redirect_stdout(s_output):
                 # start exec as Process
-                code_execution = Process(target=exec,
-                                         args=(input_code, safe_builtins,))
+                code_execution = Process(target=exec, args=(
+                    input_code, {'__builtins__': safe_builtins}, None,)
+                                         )
                 code_execution.start()
 
                 # wait until runtime is out
