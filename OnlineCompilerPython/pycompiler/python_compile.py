@@ -1,5 +1,10 @@
 import re
 
+from multiprocessing import Process
+
+from contextlib import redirect_stdout
+from io import StringIO
+
 from copy import deepcopy
 
 
@@ -21,3 +26,9 @@ def check_code(input_code):
     doesn't contains open, exec, eval functions"""
     if re.search(r"import[\s\w\,({]*\bos", input_code) is not None:
         raise IOError("Can't import os module")
+
+
+def execute_code(input_code, safe_builtins, runtime):
+    """Calls exec() function with safe_builtins and return it output"""
+
+    return output
