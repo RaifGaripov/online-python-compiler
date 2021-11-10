@@ -36,6 +36,15 @@ def runcode(request):
             # save stdout of executed code
             output = s_output.getvalue()
 
+        except NameError as exc:
+            # handle using not safe functions
+            if exc.args[0] == "name 'open' is not defined":
+                output = "Error: You can't use open function"
+            if exc.args[0] == "name 'eval' is not defined":
+                output = "Error: You can't use eval function"
+            if exc.args[0] == "name 'exec' is not defined":
+                output = "Error: You can't use exec function"
+
         except Exception as exc:
             # handle exceptions for returning theirs texts
             sys.stdout = sys.__stdout__

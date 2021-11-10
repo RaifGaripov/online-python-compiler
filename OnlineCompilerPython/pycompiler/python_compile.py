@@ -21,9 +21,3 @@ def check_code(input_code):
     doesn't contains open, exec, eval functions"""
     if re.search(r"import[\s\w\,({]*\bos", input_code) is not None:
         raise IOError("Can't import os module")
-    elif re.search(r"open", input_code) is not None:
-        raise Exception("Can't use open function")
-    elif re.search(r"eval", input_code) is not None:
-        raise Exception("Can't use exec function")
-    elif re.search(r"exec", input_code) is not None:
-        raise Exception("Can't use exec function")
